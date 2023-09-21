@@ -30,7 +30,7 @@ export async function isUpdateCampaignDataValid(campaignDetails) {
         return false
     if(!campaignDetails || !campaignDetails._id)
         return false
-    if(!campaignDetails.campaignBrand || !mongoose.Types.ObjectId.isValid(campaignDetails.campaignBrand))
+    if(!campaignDetails.campaignBrand && !mongoose.Types.ObjectId.isValid(campaignDetails.campaignBrand))
         return false
     return true
 }
@@ -70,7 +70,7 @@ export async function returnUpdateError(campaignDetails) {
     else
         return {success: false, data: "No campaign id provided"}
     
-    if(!campaignDetails.campaignBrand || !mongoose.Types.ObjectId.isValid(campaignDetails.campaignBrand))
+    if(!campaignDetails.campaignBrand && !mongoose.Types.ObjectId.isValid(campaignDetails.campaignBrand))
         return {success: false, data: "Not valid brand id"}
 }
 
