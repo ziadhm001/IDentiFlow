@@ -1,12 +1,12 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const CampaignSchema = new mongoose.Schema({
-    campaignName: String,
-    campaignBrand: mongoose.Types.ObjectId,
-    campaignTarget: Array,
-    campaignDiscountValue: Number,
-    isDiscountPercentage: Boolean,
-    isActive: Boolean,
-})
+  campaignName: String,
+  campaignBrand: mongoose.Types.ObjectId,
+  campaignTarget: Array,
+  campaignDiscountValue: Number,
+  isDiscountPercentage: Boolean,
+  isActive: Boolean,
+});
 
-export const Campaign = mongoose.model('Campaign', CampaignSchema)
+export const Campaign = mongoose.model('Campaign', CampaignSchema);
