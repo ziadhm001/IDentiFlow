@@ -2,6 +2,27 @@
 @tailwind components;
 @tailwind utilities;
  
+
+.fade-out {
+  opacity: 1;
+  transition: opacity 1s;
+}
+
+.move-up {
+  opacity: 0;
+  transform: translateY(-100px);
+  transition: opacity 1s, transform 1s;
+}
+
+.fade-out-button {
+  opacity: 1;
+  transition: opacity 1s;
+}
+
+.fade-out-button:hover {
+  opacity: 0.7;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
