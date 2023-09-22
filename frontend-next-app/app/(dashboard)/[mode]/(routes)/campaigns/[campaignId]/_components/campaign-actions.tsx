@@ -11,22 +11,41 @@ import toast from "react-hot-toast"
 
 interface CampaignActionsProps {
     disabled: boolean,
-    campaignId: string,
-    isActive: boolean,
-    mode: string
+    mode: string,
+    initialData: {
+            campaignId: string,
+            campaignName: string,
+            campaignBrand: string,
+            campaignTarget: string[],
+            campaignDiscountValue: number, 
+            isDiscountPercentage: boolean, 
+            isActive: boolean
+    }
 }
 
-export const CampaignActions = ({disabled, campaignId, isActive, mode} : CampaignActionsProps) => {
+export const CampaignActions = ({disabled, mode, initialData} : CampaignActionsProps) => {
     const router = useRouter()
     const [isLoading, setIsLoading] = useState(false)
 
     const confetti = useConfettiStore()
     const activateCampaign = async () => {
-        confetti.onOpen()
+        try{
+            initialData.isActive = !initialData.isActive
+            axios.put('/api/campaigns', initialData).then(res =>{
+                toast.success('Campaign status updated successfully')
+                router.refresh()
+                if(initialData.isActive)
+                    confetti.onOpen()
+            })
+        }
+        catch{
+            toast.error('Something wrong happend!')
+        }
+        
     }
     const deleteCampaign = async () => {
         setIsLoading(true)
-        axios.delete(`/api/campaigns/${campaignId}`).then(res => {
+        axios.delete(`/api/campaigns/${initialData.campaignId}`).then(res => {
             if(res.data.success)
                 toast.success('Campaign deleted successfully')
             else
@@ -48,7 +67,7 @@ export const CampaignActions = ({disabled, campaignId, isActive, mode} : Campaig
                 variant="outline"
                 size="sm"
             >
-                {isActive ? "Deactivate" : "Activate"}
+                {initialData.isActive ? "Deactivate" : "Activate"}
             </Button>
             <ConfirmModal onConfirm={deleteCampaign}>
                 <Button size="sm" disabled={isLoading}>

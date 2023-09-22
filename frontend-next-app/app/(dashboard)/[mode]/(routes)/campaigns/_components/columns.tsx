@@ -101,7 +101,7 @@ export const columns: ColumnDef<Campaign>[] = [
       },
       cell: ({ row }) => {
             const isActive = row.getValue("isActive") || false
-            return <Badge className={cn("bg-slate-500", isActive && "bg=sky-700")}>{isActive ? "Active" : "Draft"}</Badge>
+            return <Badge className={cn("bg-slate-500", isActive && "bg-sky-700")}>{isActive ? "Active" : "Draft"}</Badge>
       }
   },
   {

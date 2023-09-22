@@ -6,6 +6,7 @@ const CampaignSchema = new mongoose.Schema({
     campaignTarget: Array,
     campaignDiscountValue: Number,
     isDiscountPercentage: Boolean,
+    isActive: Boolean,
 })
 
 export const Campaign = mongoose.model('Campaign', CampaignSchema)

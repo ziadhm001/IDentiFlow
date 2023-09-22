@@ -13,9 +13,10 @@ class Campaign {
                 })
             }
             else{
-                const {campaignName, campaignBrand, campaignTarget, campaignDiscountValue, isDiscountPercentage, campaignId , _id} = body
+                const {campaignName, campaignBrand, campaignTarget, campaignDiscountValue, isDiscountPercentage, isActive, campaignId , _id} = body
                 this._id = campaignId || _id;
                 this.campaignName = campaignName;
+                this.isActive = isActive;
                 this.campaignBrand = campaignBrand;
                 this.campaignTarget = campaignTarget;
                 this.campaignDiscountValue = campaignDiscountValue;
@@ -47,6 +48,15 @@ class Campaign {
             else
                 data.isDiscountPercentage = this.isDiscountPercentage
         }
+        if(this.isActive === true || this.isActive === false || this.isActive === "true" || this.isActive === "false")
+        {
+            if(this.isActive === "true")
+                data.isActive = true
+            else if(this.isActive === "false")
+                data.isActive = false
+            else
+                data.isActive = this.isActive
+        }
         return Object.keys(data).length ? data : null
     }
 
@@ -72,6 +82,15 @@ class Campaign {
                 data.isDiscountPercentage = false
             else
                 data.isDiscountPercentage = this.isDiscountPercentage
+        }
+        if(this.isActive === true || this.isActive === false || this.isActive === "true" ||  this.isActive === "false")
+        {
+            if(this.isActive === "true")
+                data.isActive = true
+            else if(this.isActive === "false")
+                data.isActive = false
+            else
+                data.isActive = this.isActive
         }
         return Object.keys(data).length ? data : null
     }
