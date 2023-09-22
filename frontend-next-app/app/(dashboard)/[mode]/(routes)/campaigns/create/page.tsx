@@ -38,6 +38,7 @@ const CreateCampaign = ({params} : {params : Params}) => {
         try{
             const response = await axios.post('/api/campaigns', {campaignName: values.campaignName, campaignBrand: '650b84714a8b6ead017af2ab'});
             router.push(`/${params.mode}/campaigns/${response.data.data.campaignId}`)
+            toast.success('Campaign created successfully')
         }
         catch(error : any){
             toast.error(error.message)

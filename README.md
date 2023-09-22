@@ -25,7 +25,7 @@ To set up and run the IDentiFlow application, follow these steps:
  - Microservice 2:
     1. Navigate to the microservice 2 directory: cd microservice2
     2. Install dependencies: npm install
-Repeat the above steps for each microservice in your project, providing clear instructions for each one.
+2. Repeat the above steps for each microservice in your project, providing clear instructions for each one.
 
 
 ## Running the application

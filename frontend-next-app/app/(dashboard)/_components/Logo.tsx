@@ -1,12 +1,11 @@
 import Image from "next/image";
-
-export const Logo = () => {
+export const Logo = ({ color }: { color: "blue" | "green" | "black" | "white" }) => {
     return (
         <Image 
-            height={130}
-            width={130}
+            height={50}
+            width={250}
             alt="logo"
-            src="/logo.svg"
+            src={`/checkpeas-${color}.png`}
         />
     )
 }
