@@ -33,7 +33,7 @@ const CampaignIdPage = async ({params} : { params: {campaignId: string, mode: st
                 !campaign.isActive &&
                     <Banner
                         variant="warning"
-                        label="This campaign is not currently active"
+                        label="This campaign is not currently active, which means users won't be able to use it."
                     />
             }
             <div className="p-6">
@@ -48,8 +48,7 @@ const CampaignIdPage = async ({params} : { params: {campaignId: string, mode: st
                     </div>
                     <CampaignActions
                             disabled={!isCompleted}
-                            campaignId={campaign.campaignId}
-                            isActive={campaign.isActive}
+                            initialData={campaign}
                             mode={params.mode}
                     />
                 </div>
