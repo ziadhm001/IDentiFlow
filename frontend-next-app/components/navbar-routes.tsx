@@ -5,12 +5,9 @@ import { usePathname, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Braces, User, User2Icon, UserCheck, UserX } from "lucide-react";
 import Link from "next/link";
-import path from "path";
 
 export const NavbarRoutes = () => {
     const pathname = usePathname()
-    const router = useRouter()
-
     const isAdminPage = pathname?.includes("/admin")
     const isLandingPage = pathname === '/'
     return (

@@ -25,9 +25,13 @@ export async function getCampaign(campaignDetails) {
     return response
 }
 
+export async function getAllCampaigns() {
+    let response = await campaignRepository.getAllCampaigns()
+    return response
+}
+
 export async function updateCampaign(campaignDetails) {
     let response
-    
     await isUpdateCampaignDataValid(campaignDetails)
         ? 
         response = await campaignRepository.updateCampaign(campaignDetails)

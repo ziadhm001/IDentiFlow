@@ -35,6 +35,21 @@ export default function defineRoutes(app) {
     }
   });
 
+  router.get('/', async (req, res, next) => {
+    try {
+      console.log(`Campaign API was called to GET all campaigns`);
+      const getCampaignResponse = await campaignUseCase.getAllCampaigns();
+      if (!getCampaignResponse.success) {
+        res.status(404).json(getCampaignResponse);
+        return;
+      }
+      res.json(getCampaignResponse);
+
+    } catch (error) {
+      next(error);
+    }
+  });
+
   router.put('/', async (req, res, next) => {
     try {
       console.log(

@@ -10,32 +10,32 @@ const api = Axios.create({
     }
 });
 
-
-export async function POST(
+export async function GET(
   req: Request,
+  { params } : { params: { campaignId: string }}
 ) {
   try {
     const { userId } = auth();
-    const body = await req.json();
+    const { campaignId } = params 
     api.defaults.headers.userId = userId
-    const campaign = await api.post('/api/campaign', body)
-
-    return NextResponse.json(campaign.data);
+    console.log(campaignId)
+    const campaign = await api.get(`/api/campaign`)
+    return NextResponse.json(campaign.data.data);
   } catch (error) {
     console.log("[COURSES]", error);
     return new NextResponse("Internal Error", { status: 500 });
   }
 }
 
-export async function PUT(
+export async function DELETE(
   req: Request,
+  { params } : { params: { campaignId: string }}
 ) {
   try {
     const { userId } = auth();
-    const body = await req.json();
+    const { campaignId } = params 
     api.defaults.headers.userId = userId
-    const campaign = await api.put('/api/campaign', body)
-
+    const campaign = await api.delete(`/api/campaign/${campaignId}`)
     return NextResponse.json(campaign.data);
   } catch (error) {
     console.log("[COURSES]", error);

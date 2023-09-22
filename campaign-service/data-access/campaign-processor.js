@@ -3,17 +3,31 @@ class Campaign {
     {
         if(body)
         {
-            const {campaignName, campaignBrand, campaignTarget, campaignDiscountValue, isDiscountPercentage, campaignId , _id} = body
-            this._id = campaignId || _id;
-            this.campaignName = campaignName;
-            this.campaignBrand = campaignBrand;
-            this.campaignTarget = campaignTarget;
-            this.campaignDiscountValue = campaignDiscountValue;
-            this.isDiscountPercentage = isDiscountPercentage;
+            if(Array.isArray(body))
+            {  
+                body.map((campaign, index) => {
+                    if(index)
+                        this.campaign = [...this.campaign, campaign]
+                    else
+                        this.campaign = [campaign]
+                })
+            }
+            else{
+                const {campaignName, campaignBrand, campaignTarget, campaignDiscountValue, isDiscountPercentage, campaignId , _id} = body
+                this._id = campaignId || _id;
+                this.campaignName = campaignName;
+                this.campaignBrand = campaignBrand;
+                this.campaignTarget = campaignTarget;
+                this.campaignDiscountValue = campaignDiscountValue;
+                this.isDiscountPercentage = isDiscountPercentage;
+            }
+            
         }
     }
     getData() {
         let data = {}
+        if (this.campaign)
+            return this.campaign
         if(this._id)
             data._id = this._id
         if(this.campaignName)
@@ -38,6 +52,8 @@ class Campaign {
 
     getRaw() {
         let data = {}
+        if (this.campaign)
+            return this.campaign
         if(this._id)
             data.campaignId = this._id
         if(this.campaignName)

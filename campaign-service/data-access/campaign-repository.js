@@ -17,6 +17,15 @@ export async function getCampaign(campaignDetails) {
         return {success: false, data: "Error with getting record"}
 }
 
+export async function getAllCampaigns() {
+    const gettingResponse = getRaw(await Campaign.find());
+    if(gettingResponse)
+        return {success: true, data: gettingResponse}
+    else
+        return {success: false, data: "Error with getting record"}
+}
+
+
 export async function updateCampaign(campaignDetails) {
     const { _id } = campaignDetails
     const updatingResponse = getRaw(await Campaign.findOneAndUpdate({_id}, campaignDetails, {new: true}));
