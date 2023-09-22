@@ -39,14 +39,15 @@ const CreateCampaign = ({params} : {params : Params}) => {
             const response = await axios.post('/api/campaigns', {campaignName: values.campaignName, campaignBrand: '650b84714a8b6ead017af2ab'});
             router.push(`/${params.mode}/campaigns/${response.data.data.campaignId}`)
             toast.success('Campaign created successfully')
+            router.refresh()
         }
         catch(error : any){
             toast.error(error.message)
         }
     }
         return ( 
-        <div className="max-w-5xl mx-auto flex md:items-center md:justify-center h-full p-6 mt-auto">
-            <div>
+        <div className="flex max-w-max mx-auto p-16 items-center">
+            <div className="flex flex-col max-h-max p-6 justify-center shadow-xl border border-slate-100">
                 <h1>
                     Name your campagin
                 </h1>

@@ -1,0 +1,28 @@
+.fade-out {
+    opacity: 1;
+    transition: opacity 3s;
+  }
+  
+  .move-up-hide {
+    opacity: 0;
+    transform: translateY(-100px);
+    transition: opacity 3s, transform 3s;
+  }
+  
+  .fade-out-button {
+    opacity: 1;
+    transition: opacity 3s;
+  }
+  
+  .fade-out-button:hover {
+    opacity: 0.7;
+  }
+  
+  .move-up {
+    transform: translateY(-100px);
+    transition: transform 3s;
+  }
+
+  .signup-container {
+    /* Styles for the signup container */
+  }
