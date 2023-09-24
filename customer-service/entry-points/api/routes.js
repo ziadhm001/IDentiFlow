@@ -30,5 +30,15 @@ export default function defineRoutes(app) {
     }
   });
 
+  router.get('/analytics', async (req, res, next) => {
+    try {
+      console.log(`Customer API was called to GET all verified customers analytics`);
+      const getCampaignResponse = await customerUseCase.getVerifiedCustomersAnalytics();
+      res.json(getCampaignResponse);
+    } catch (error) {
+      next(error);
+    }
+  });
+
   app.use('/api/customer', router);
 }
