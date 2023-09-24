@@ -16,6 +16,6 @@ defineRoutes(app)
 mongoose.connect('mongodb+srv://ziadhm001:ziadhm001@nodecourse.pv53znd.mongodb.net/').then(() => {
     console.log('@@@@ ON DB')
 })
-app.listen(5001, () => {
-    console.log('@@@@ ON 5001')
+app.listen(5002, () => {
+    console.log('@@@@ ON 5002')
 })

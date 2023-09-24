@@ -17,3 +17,8 @@ export async function getVerifiedCustomers() {
   const customersData = await customerRepository.getCustomers({isVerified: true});
   return customersData
 }
+
+export async function getVerifiedCustomersAnalytics() {
+  const customersData = await customerRepository.getCustomersAnalytics({isVerified: true});
+  return customersData
+}
