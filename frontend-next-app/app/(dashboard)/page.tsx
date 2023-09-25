@@ -14,6 +14,7 @@ const Dashbaord = () => {
             <h1 className="text-2xl text-center mt-6">
                 Hey <span className="font-[600]">{user?.firstName}</span>, Welcome Back
             </h1>
+
             <div className="flex flex-row mt-4 gap-8 justify-center">
                 <Link href="/admin/campaigns">
                     <Button className="gap-2" size="lg">
@@ -29,7 +30,6 @@ const Dashbaord = () => {
                 </Link>
             </div>
         </div>
-        
     </div> );
 }
  
