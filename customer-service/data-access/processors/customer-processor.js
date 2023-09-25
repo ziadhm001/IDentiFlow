@@ -21,15 +21,27 @@ class Customer {
         return this.customers;
       }
   
-      const data = {
-        _id: this._id,
-        email: this.email,
-        country: this.country,
-        segment: this.segment,
-        firstName: this.firstName,
-        lastName: this.lastName,
-      };
-  
+      const data = {}
+      
+      if (this._id) {
+        data._id = this._id;
+      }
+      if (this.email) {
+        data.email = this.email;
+      }
+      if (this.country) {
+        data.country = this.country;
+      }
+      if (this.segment) {
+        data.segment = this.segment;
+      }
+      if (this.firstName) {
+        data.firstName = this.firstName;
+      }
+      if (this.lastName) {
+        data.lastName = this.lastName;
+      }
+
       if (typeof this.isVerified === 'boolean' || this.isVerified === 'true' || this.isVerified === 'false') {
         data.isVerified = this.isVerified === 'true' ? true : this.isVerified === 'false' ? false : this.isVerified;
       }
@@ -42,15 +54,27 @@ class Customer {
         return this.customers;
       }
   
-      const data = {
-        customerId: this._id,
-        email: this.email,
-        country: this.country,
-        segment: this.segment,
-        firstName: this.firstName,
-        lastName: this.lastName,
-      };
-  
+      const data = {}
+      
+      if (this._id) {
+        data._id = this._id;
+      }
+      if (this.email) {
+        data.email = this.email;
+      }
+      if (this.country) {
+        data.country = this.country;
+      }
+      if (this.segment) {
+        data.segment = this.segment;
+      }
+      if (this.firstName) {
+        data.firstName = this.firstName;
+      }
+      if (this.lastName) {
+        data.lastName = this.lastName;
+      }
+
       if (typeof this.isVerified === 'boolean' || this.isVerified === 'true' || this.isVerified === 'false') {
         data.isVerified = this.isVerified === 'true' ? true : this.isVerified === 'false' ? false : this.isVerified;
       }

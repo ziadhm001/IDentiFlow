@@ -1,15 +1,15 @@
-import { getRaw } from "./customer-processor.js";
-import { Customer } from "./models/customer-model.js";
+import { getRaw } from "../processors/otp-processor.js";
+import { Customer } from "../models/customer-model.js";
 
-export async function addCustomer(customerDetails) {
-  const addingResponse = getRaw(await Customer.create(customerDetails));
+export async function addCustomer(customerData) {
+  const addingResponse = getRaw(await Customer.create(customerData));
   return addingResponse
     ? { success: true, data: addingResponse }
     : { success: false, data: "Error with adding record" };
 }
 
-export async function getCustomer(customerDetails) {
-  const gettingResponse = getRaw(await Customer.findOne(customerDetails));
+export async function getCustomer({email}) {
+  const gettingResponse = getRaw(await Customer.findOne({email}));
   return gettingResponse
     ? { success: true, data: gettingResponse }
     : { success: false, data: "Error with getting record" }
@@ -51,11 +51,11 @@ export async function getCustomersAnalytics(filter) {
     : { success: false, data: "Error with getting record" }
 }
 
-export async function updateCustomer(customerDetails) {
-  const { _id } = customerDetails;
-  const updatingResponse = getRaw(await Customer.findOneAndUpdate({ _id }, customerDetails, { new: true }));
+export async function   verifyCustomer(customerDetails) {
+  const { email } = customerDetails
+  const updatingResponse = getRaw(await Customer.findOneAndUpdate({ email }, { isVerified: true }, { new: true }));
   return updatingResponse
-    ? { success: true, data: updatingResponse }
+    ? { success: true, data: "Verified successfully" }
     : { success: false, data: "Error with updating record" };
 }
 
