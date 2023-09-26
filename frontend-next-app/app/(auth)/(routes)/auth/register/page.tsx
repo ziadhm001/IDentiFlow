@@ -40,7 +40,6 @@ type FormSchema = z.infer<typeof formSchema>
   })
   const { isSubmitting, isValid } = form.formState;
   const onSubmit = async (values: FormSchema) => {
-    console.log(values)
 }
   return (
     <div className="items-center justify-center h-screen grid grid-cols-2">

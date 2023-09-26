@@ -18,7 +18,6 @@ export async function GET(
     const { userId } = auth();
     const { campaignId } = params 
     api.defaults.headers.userId = userId
-    console.log(campaignId)
     const campaign = await api.get(`/api/campaign`)
     return NextResponse.json(campaign.data.data);
   } catch (error) {

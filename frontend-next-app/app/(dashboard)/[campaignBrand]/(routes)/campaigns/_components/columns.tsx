@@ -56,7 +56,7 @@ export const columns: ColumnDef<Campaign>[] = [
         if(isPercentage !== undefined)
             return <Badge className={cn("bg-emerald-400 hover:bg-emerald-600", isPercentage && "bg-sky-500 hover:bg-sky-700")}>{isPercentage ? "%" : "$"}</Badge>
         else
-            return <Badge className="bg-slate-300">No yet selected</Badge>
+            return <Badge className="bg-slate-300">Not yet selected</Badge>
   }
   },
   {
@@ -74,7 +74,7 @@ export const columns: ColumnDef<Campaign>[] = [
       },
   },
   {
-    accessorKey: 'mode',
+    accessorKey: 'campaignBrand',
     header: ({ column }) => {
       return (
         <></>
@@ -108,7 +108,7 @@ export const columns: ColumnDef<Campaign>[] = [
     id: "actions",
     cell: ({ row }) => {
         const { _id } = row.original;
-        const mode = row.getValue("mode")
+        const campaignBrand = row.getValue("campaignBrand")
         return (
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -118,7 +118,7 @@ export const columns: ColumnDef<Campaign>[] = [
                     </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
-                    <Link href={`/${mode}/campaigns/${_id}`}>
+                    <Link href={`/${campaignBrand}/campaigns/${_id}`}>
                         <DropdownMenuItem>
                             <Pencil className="h-4 w-4 mr-2"/>
                             Edit

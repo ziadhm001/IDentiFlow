@@ -57,7 +57,6 @@ export const TitleForm = ({initialData} : TitleFormProps) => {
     const onSubmit = async (values: FormSchema) => {
         const data = initialData
         data.campaignName = values.campaignName
-        console.log(data)
         try{
             axios.put('/api/campaigns', data).then(res =>{
                 toggleEdit()

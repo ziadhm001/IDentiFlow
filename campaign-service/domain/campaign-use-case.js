@@ -25,8 +25,8 @@ export async function getCampaign(campaignDetails) {
     return response
 }
 
-export async function getAllCampaigns() {
-    let response = await campaignRepository.getAllCampaigns()
+export async function getAllCampaigns(campaignDetails) {
+    let response = await campaignRepository.getAllCampaigns(campaignDetails)
     return response
 }
 
