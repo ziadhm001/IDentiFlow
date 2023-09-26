@@ -1,4 +1,8 @@
 import * as userRepository from '../data-access/user-repository.js';
+import * as permissionRepository from '../data-access/permission-repository.js'
+import { User } from '../data-access/models/user-model.js';
+import { Permission } from '../data-access/models/permission-model.js';
+import { formatResponse } from '../helper.js';
 import {
   isAddUserDataValid,
   isGetUserDataValid,
@@ -9,6 +13,21 @@ import {
   returnGetError,
   returnUpdateError,
 } from './user-validators.js';
+
+export async function login(userDetails) {
+  const user = await User.create(userDetails)
+  return user
+}
+
+export async function register(userDetails) {
+  try {
+    const user = new User(userDetails)
+    const res = await addUser(user);
+    return res
+  } catch(e) {
+    return { success: false, data: 'already registered' }
+  }
+}
 
 export async function addUser(userDetails) {
   const res = isAddUserDataValid(userDetails)
@@ -40,4 +59,5 @@ export async function deleteUser(userDetails) {
   const res = isDeleteUserDataValid(userDetails)
     ? await userRepository.deleteUser(userDetails)
     : returnDeleteError(userDetails);
+  return res;
 }

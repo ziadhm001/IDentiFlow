@@ -1,10 +1,8 @@
-import { User } from './models/user-model.js';
+import { Brand } from './models/brand-model.js'
 import { formatResponse } from '../helper.js';
-import mongoose from 'mongoose';
 
-export async function addUser(userDetails) {
-  const addingResponse = await User.create(userDetails);
-  
+export async function addBrand(brandDetails) {
+  const addingResponse = await Brand.create(brandDetails);
   const formattedResponse = formatResponse(
     'Error with adding record',
     addingResponse
@@ -12,8 +10,8 @@ export async function addUser(userDetails) {
   return formattedResponse;
 }
 
-export async function getUser(userDetails) {
-  const gettingResponse = await User.findOne(userDetails);
+export async function getBrand(brandDetails) {
+  const gettingResponse = await Brand.findOne(brandDetails);
   const formattedResponse = formatResponse(
     'Error with getting record',
     gettingResponse
@@ -21,8 +19,8 @@ export async function getUser(userDetails) {
   return formattedResponse;
 }
 
-export async function getAllUsers() {
-  const gettingResponse = await User.find();
+export async function getAllBrands() {
+  const gettingResponse = await Brand.find();
   const formattedResponse = formatResponse(
     'Error with getting record',
     gettingResponse
@@ -30,8 +28,8 @@ export async function getAllUsers() {
   return formattedResponse;
 }
 
-export async function updateUser(userDetails) {
-  const updatingResponse = await User.findOneAndUpdate(userDetails);
+export async function updateBrand(brandDetails) {
+  const updatingResponse = await Brand.findOneAndUpdate(brandDetails);
   const formattedResponse = formatResponse(
     'Error with updating record',
     updatingResponse
@@ -39,8 +37,8 @@ export async function updateUser(userDetails) {
   return formattedResponse;
 }
 
-export async function deleteUser(userDetails) {
-  const deletingResponse = await User.findOneAndRemove(userDetails);
+export async function deleteBrand(brandDetails) {
+  const deletingResponse = await Brand.findOneAndRemove(brandDetails);
   const formattedResponse = formatResponse(
     'Error with deleting record',
     deletingResponse
