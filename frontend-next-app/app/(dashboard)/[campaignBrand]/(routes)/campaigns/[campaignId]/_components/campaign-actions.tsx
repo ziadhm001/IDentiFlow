@@ -11,7 +11,7 @@ import toast from "react-hot-toast"
 
 interface CampaignActionsProps {
     disabled: boolean,
-    mode: string,
+    campaignBrand: string,
     initialData: {
             campaignId: string,
             campaignName: string,
@@ -23,7 +23,7 @@ interface CampaignActionsProps {
     }
 }
 
-export const CampaignActions = ({disabled, mode, initialData} : CampaignActionsProps) => {
+export const CampaignActions = ({disabled, campaignBrand, initialData} : CampaignActionsProps) => {
     const router = useRouter()
     const [isLoading, setIsLoading] = useState(false)
 
@@ -51,7 +51,7 @@ export const CampaignActions = ({disabled, mode, initialData} : CampaignActionsP
             else
                 toast.error('Campaign already deleted!')
             router.refresh()
-            router.push(`/${mode}/campaigns`)
+            router.push(`/${campaignBrand}/campaigns`)
         }).catch(error => {
             toast.error('Something wrong happend')
         }).finally(() => {
@@ -64,7 +64,7 @@ export const CampaignActions = ({disabled, mode, initialData} : CampaignActionsP
             <Button
                 onClick={activateCampaign}
                 disabled={disabled || isLoading}
-                variant="outline"
+                variant={initialData.isActive ? "outline" : "add"}
                 size="sm"
             >
                 {initialData.isActive ? "Deactivate" : "Activate"}

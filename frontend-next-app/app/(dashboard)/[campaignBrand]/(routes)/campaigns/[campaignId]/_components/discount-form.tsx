@@ -59,7 +59,6 @@ export const DiscountForm = ({initialData} : DiscountFormProps) => {
         const data = initialData
         data.campaignDiscountValue = parseFloat(values.campaignDiscountValue)
         data.isDiscountPercentage = values.isDiscountPercentage
-        console.log(values)
         try{
             axios.put('/api/campaigns', data).then(res =>{
                 toggleEdit()

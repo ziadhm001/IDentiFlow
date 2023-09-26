@@ -17,3 +17,22 @@ export const verficationHTML = (otp) =>
     </tr>
     </table>
 `
+
+export const chatGPTMessageContent = (email) => {
+    `
+        You should answer that in a json format to be provided as an API response to an on going app, format { segment, country }
+        if you don't know the segment set it to null
+        
+        What segment is this email out of these segments? or it doesn't match any?
+        
+        Segments are:
+        Students
+        Teachers
+        Healthcare Workers
+        Military
+        First Responders
+        
+        Target mail:
+        ${email}
+    `
+}

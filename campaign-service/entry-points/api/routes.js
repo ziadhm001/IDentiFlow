@@ -19,11 +19,13 @@ export default function defineRoutes(app) {
     }
   });
 
-  router.get('/:_id', async (req, res, next) => {
+  router.get('/:campaignBrand/:campaignId', async (req, res, next) => {
     try {
-      console.log(`Campaign API was called to GET Campaign by id, ${req.params._id}`);
+      console.log(`Campaign API was called to GET Campaign by id, ${req.params.campaignId} of brand ${req.params.campaignBrand}`);
       const campaignReceivedData = getParsed(req.params)
       const getCampaignResponse = await campaignUseCase.getCampaign(campaignReceivedData);
+      console.log(getCampaignResponse)
+
       if (!getCampaignResponse.success) {
         res.status(404).json(getCampaignResponse);
         return;
@@ -35,10 +37,11 @@ export default function defineRoutes(app) {
     }
   });
 
-  router.get('/', async (req, res, next) => {
+  router.get('/:campaignBrand', async (req, res, next) => {
     try {
-      console.log(`Campaign API was called to GET all campaigns`);
-      const getCampaignResponse = await campaignUseCase.getAllCampaigns();
+      console.log(`Campaign API was called to GET all campaigns of brand ${req.params.campaignBrand}`);
+      const campaignReceivedData = getParsed(req.params)
+      const getCampaignResponse = await campaignUseCase.getAllCampaigns(campaignReceivedData);
       if (!getCampaignResponse.success) {
         res.status(404).json(getCampaignResponse);
         return;

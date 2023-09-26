@@ -1,25 +1,22 @@
-"use client"
 import axios from "axios";
-import { CopyIcon, GitBranch, GitBranchPlus, LayoutDashboard } from "lucide-react";
+import { CopyIcon, GitBranchPlus, LayoutDashboard } from "lucide-react";
 import { IconBadge } from "@/components/icon-badge";
 import { TitleForm } from "./_components/title-form";
 import { TargetForm } from "./_components/target-form";
 import { DiscountForm } from "./_components/discount-form";
 import { Banner } from "@/components/banner";
 import { CampaignActions } from "./_components/campaign-actions";
-
-import CopyToClipboard from "react-copy-to-clipboard";
-import SyntaxHighlighter from "react-syntax-highlighter";
-import { docco } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import { Button } from "@/components/ui/button";
+import { SyntaxHighlighteEdited } from "../_components/syntax-highlighter";
 
-async function getData(campaignId: string): Promise<{ campaignId: string, campaignName: string, campaignBrand: string, campaignTarget: string[], campaignDiscountValue: number, isDiscountPercentage: boolean, isActive: boolean }> {
-    const response = await axios.get(`http://localhost:5001/api/campaign/${campaignId}`)
+async function getData(campaignBrand: string, campaignId: string): Promise<{ campaignId: string, campaignName: string, campaignBrand: string, campaignTarget: string[], campaignDiscountValue: number, isDiscountPercentage: boolean, isActive: boolean }> {
+    const response = await axios.get(`http://localhost:5001/api/campaign/${campaignBrand}/${campaignId}`)
     const campaign = response.data
     return campaign.data
 }
-const CampaignIdPage = async ({ params }: { params: { campaignId: string, mode: string } }) => {
-    const code = `<script>
+const CampaignIdPage = async ({ params }: { params: { campaignId: string, campaignBrand: string } }) => {
+    const code = `
+    <script>
     const container = document.getElementById('form-container');
     const form = document.createElement('form');
     form.style.cssText = 'max-width: 400px; margin: 0 auto; padding: 20px; border: 1px solid #ccc; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); display: flex; flex-direction: column;';
@@ -134,11 +131,10 @@ const CampaignIdPage = async ({ params }: { params: { campaignId: string, mode: 
             console.error('Error:', error);
         });
     });
-</script>`
-    const { campaignId } = params
-    const campaign = await getData(campaignId)
-    console.log(campaign)
-
+    </script>
+    `
+    const { campaignId, campaignBrand } = params
+    const campaign = await getData(campaignBrand, campaignId)
     const requiredFields = [
         campaign.campaignName,
         campaign.campaignTarget,
@@ -171,7 +167,7 @@ const CampaignIdPage = async ({ params }: { params: { campaignId: string, mode: 
                     <CampaignActions
                         disabled={!isCompleted}
                         initialData={campaign}
-                        mode={params.mode}
+                        campaignBrand={campaignBrand}
                     />
                 </div>
                 <div className="grid grid-cols-1 gap-6 mt-16">
@@ -214,11 +210,7 @@ const CampaignIdPage = async ({ params }: { params: { campaignId: string, mode: 
                                             <span>Copy to clipboard</span>
                                         </Button>
                                     </div>
-                                    <div className="overflow-scroll max-h-max">
-                                        <SyntaxHighlighter language="html" style={docco}>
-                                            {`<div id="form-container"></div>`}
-                                        </SyntaxHighlighter>
-                                    </div>
+                                    <SyntaxHighlighteEdited code='<div id="form-container"></div>'/>
                                 </div>
                                 <div className="flex flex-row">
                                     <p className="text-lg">- Copy the following</p>
@@ -231,7 +223,7 @@ const CampaignIdPage = async ({ params }: { params: { campaignId: string, mode: 
                                     </code>
                                     <p className="text-lg">tag</p>
                                 </div>
-                                <div className="bg-slate-100 rounded-md p-4 border">
+                                <div className="bg-slate-100 rounded-md p-4 border h-48">
                                     <div className='font-medium flex items-center justify-between'>
                                         <h1 className='font-bold'>#2</h1>
                                         <Button variant="ghost">
@@ -239,19 +231,12 @@ const CampaignIdPage = async ({ params }: { params: { campaignId: string, mode: 
                                             <span>Copy to clipboard</span>
                                         </Button>
                                     </div>
-                                    <div className="overflow-scroll h-48">
-                                        <SyntaxHighlighter language="javascript" style={docco}>
-                                            {code}
-                                        </SyntaxHighlighter>
-                                    </div>
+                                    <SyntaxHighlighteEdited code={code}/>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
+                    </div>  
                 </div>
-                {/* code syntax highlighter window here */}
-
             </div>
         </>
     );

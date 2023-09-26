@@ -5,7 +5,6 @@ import { headers } from "next/dist/client/components/headers";
 const DashbaordLayout = ({children} : {children : React.ReactNode}) => {
     const headersList = headers();
     const pathname = headersList.get("x-pathname") || "";
-    console.log(pathname);
     const isLandingPage = pathname === '/'
     
     return ( 

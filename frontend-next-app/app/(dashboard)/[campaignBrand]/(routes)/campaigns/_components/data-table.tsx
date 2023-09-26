@@ -30,13 +30,13 @@ import { Plus } from "lucide-react"
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[],
-  mode: string,
+  campaignBrand: string,
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
-  mode,
+  campaignBrand,
 }: DataTableProps<TData, TValue>) {
     const [sorting, setSorting] = React.useState<SortingState>([])
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -68,7 +68,7 @@ export function DataTable<TData, TValue>({
           }
           className="max-w-sm"
         />
-        <Link href={`/${mode}/campaigns/create`}>
+        <Link href={`/${campaignBrand}/campaigns/create`}>
                     <Button variant="add">
                         <Plus />
                         <span>New Campaign</span>
@@ -121,7 +121,7 @@ export function DataTable<TData, TValue>({
         </div>
         <div className="flex items-center justify-end space-x-2 py-4">
         <Button
-          variant="outline"
+          variant="secondary"
           size="sm"
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
@@ -129,7 +129,7 @@ export function DataTable<TData, TValue>({
           Previous
         </Button>
         <Button
-          variant="outline"
+          variant="secondary"
           size="sm"
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}

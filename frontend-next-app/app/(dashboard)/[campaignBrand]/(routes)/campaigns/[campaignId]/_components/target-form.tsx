@@ -56,7 +56,6 @@ export const TargetForm = ({ initialData }: TargetFormProps) => {
 
     const onSubmit = async (values: FormSchema) => {
         const data = initialData
-        console.log(data)
         try {
             axios.put('/api/campaigns', data).then(res => {
                 toggleEdit()

@@ -1,5 +1,6 @@
 import { Campaign } from "./models/campaign-model.js";
 import { getRaw } from "./campaign-processor.js";
+import mongoose from "mongoose";
 
 export async function addCampaign(campaignDetails) {
     const addingResponse = getRaw(await Campaign.create(campaignDetails));
@@ -17,8 +18,8 @@ export async function getCampaign(campaignDetails) {
         return {success: false, data: "Error with getting record"}
 }
 
-export async function getAllCampaigns() {
-    const gettingResponse = getRaw(await Campaign.find());
+export async function getAllCampaigns(campaignDetails) {
+    const gettingResponse = getRaw(await Campaign.find(campaignDetails)); 
     if(gettingResponse)
         return {success: true, data: gettingResponse}
     else

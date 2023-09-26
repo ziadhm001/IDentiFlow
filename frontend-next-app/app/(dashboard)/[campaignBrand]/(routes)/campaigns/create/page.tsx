@@ -16,7 +16,6 @@ import {
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 import toast from "react-hot-toast";
 const validationSchema = z.object({
     campaignName: z.string().min(1, {
@@ -24,7 +23,8 @@ const validationSchema = z.object({
     }),
 });
 type ValidationSchema = z.infer<typeof validationSchema>
-const CreateCampaign = ({params} : {params : Params}) => {
+const CreateCampaign = ({params} : {params : {campaignBrand: string}}) => {
+    const { campaignBrand } = params
     const router = useRouter()
     const form = useForm<ValidationSchema>({
         resolver: zodResolver(validationSchema),
@@ -36,8 +36,8 @@ const CreateCampaign = ({params} : {params : Params}) => {
     const { isSubmitting, isValid } = form.formState
     const onSubmit = async (values: ValidationSchema) => {
         try{
-            const response = await axios.post('/api/campaigns', {campaignName: values.campaignName, campaignBrand: '650b84714a8b6ead017af2ab'});
-            router.push(`/${params.mode}/campaigns/${response.data.data.campaignId}`)
+            const response = await axios.post('/api/campaigns', {campaignName: values.campaignName, campaignBrand: campaignBrand});
+            router.push(`/${campaignBrand}/campaigns/${response.data.data.campaignId}`)
             toast.success('Campaign created successfully')
             router.refresh()
         }
@@ -80,7 +80,7 @@ const CreateCampaign = ({params} : {params : Params}) => {
                             )}
                         />
                         <div className="flex items-center gap-x-2">
-                            <Link href={`/${params.mode}/campaigns  `}>
+                            <Link href={`/${campaignBrand}/campaigns`}>
                                 <Button type="button" variant="ghost">
                                     Cancel
                                 </Button>

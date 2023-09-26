@@ -1,3 +1,5 @@
+import mongoose from "mongoose";
+
 class Campaign {
     constructor(body)
     {
@@ -65,11 +67,11 @@ class Campaign {
         if (this.campaign)
             return this.campaign
         if(this._id)
-            data.campaignId = this._id
+            data.campaignId = this._id.toHexString()
         if(this.campaignName)
             data.campaignName = this.campaignName
         if(this.campaignBrand)
-            data.campaignBrand = this.campaignBrand
+            data.campaignBrand = this.campaignBrand.toHexString()
         if(this.campaignTarget)
             data.campaignTarget = Array.isArray(this.campaignTarget) ? this.campaignTarget : [this.campaignTarget]
         if(this.campaignDiscountValue && !Number.isNaN(parseFloat(this.campaignDiscountValue)))
